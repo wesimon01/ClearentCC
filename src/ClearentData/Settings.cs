@@ -8,7 +8,9 @@ namespace ClearentData
       
         public static string GetRepoType()
         {
-            var what = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            // var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            // above will tell you where the executing code is looking for configuration
+
             if (string.IsNullOrEmpty(_repoType))
                 _repoType = ConfigurationManager.AppSettings["RepositoryType"].ToString();
 

@@ -1,13 +1,11 @@
 ﻿using ClearentData;
-using System;
-using System.Collections.Generic;
 
 namespace Clearent
 {
     public abstract class CreditCard
     {       
         public decimal Balance { get; set; }
-        public decimal Rate { get; protected set; }
+        public decimal Rate { get; set; }
         public CreditCardType CardType { get; set; }
 
         protected ICreditCardRepo repo;
