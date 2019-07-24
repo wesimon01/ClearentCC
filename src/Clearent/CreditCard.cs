@@ -17,7 +17,7 @@ namespace Clearent
             Balance = balance;
         }
         
-        public decimal CalculateInterest()
+        public virtual decimal CalculateInterest()
             => Rate * Balance;
     }
 }
