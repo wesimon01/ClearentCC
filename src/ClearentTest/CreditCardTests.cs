@@ -81,9 +81,9 @@ namespace Tests
             person1.Wallets.Add(new Wallet(
                 new List<CreditCard>()
                 {
+                    new Visa(100M),
                     new MasterCard(100M),
-                    new MasterCard(100M),
-                    new Visa(100M)
+                    new Discover(100M)
                 }                
             ));
             
@@ -107,9 +107,9 @@ namespace Tests
             var interestWallet1Person2 = person2.Wallets[0].CalculateWalletInterest();
 
             //Assert
-            Assert.AreEqual(interestPerson1, 20M);
+            Assert.AreEqual(interestPerson1, 16M);
             Assert.AreEqual(interestPerson2, 15M);
-            Assert.AreEqual(interestWallet1Person1, 20M);
+            Assert.AreEqual(interestWallet1Person1, 16M);
             Assert.AreEqual(interestWallet1Person2, 15M);
         }
     }
