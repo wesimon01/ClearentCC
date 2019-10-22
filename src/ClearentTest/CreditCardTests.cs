@@ -11,27 +11,24 @@ namespace Tests
         public void TestCase1()
         {
             //Arrange
-            var wallets = new List<Wallet>();
-            var creditCards = new List<CreditCard>()
-            {
-                new Visa(CreditCardType.Visa, 100M),
-                new MasterCard(CreditCardType.MasterCard, 100M),
-                new Discover(CreditCardType.Discover, 100M)
-            };
-            wallets.Add(new Wallet(creditCards));
-
             var person = new Person()
             {
                 FirstName = "Warren",
                 LastName = "Buffet",
-                Wallets = wallets
             };
-            
+            var creditCards = new List<CreditCard>()
+            {
+                new Visa(100M),
+                new MasterCard(100M),
+                new Discover(100M)
+            };
+            person.Wallets.Add(new Wallet(creditCards));
+          
             //Act
             var interestPerson = person.CalculateTotalInterest();
-            var interestVisa = person.Wallets[0].Cards[0].CalculateInterest();
-            var interestMC = person.Wallets[0].Cards[1].CalculateInterest();
-            var interestDiscover = person.Wallets[0].Cards[2].CalculateInterest();
+            var interestVisa = person.Wallets[0].Cards[0].CalculateCardInterest();
+            var interestMC = person.Wallets[0].Cards[1].CalculateCardInterest();
+            var interestDiscover = person.Wallets[0].Cards[2].CalculateCardInterest();
             
             //Assert
             Assert.AreEqual(interestPerson, 16M);
@@ -44,29 +41,27 @@ namespace Tests
         public void TestCase2()
         {
             //Arrange
-            var wallets = new List<Wallet>();
-            var creditCards1 = new List<CreditCard>()
-            {
-                new Visa(CreditCardType.Visa, 100M),
-                new Discover(CreditCardType.Discover, 100M)
-            };
-            var creditCards2 = new List<CreditCard>()
-            {
-                new MasterCard(CreditCardType.MasterCard, 100M)
-            };
-            wallets.Add(new Wallet(creditCards1));
-            wallets.Add(new Wallet(creditCards2));
-
             var person = new Person()
             {
                 FirstName = "Bit",
                 LastName = "Coin",
-                Wallets = wallets
             };
+            var creditCards1 = new List<CreditCard>()
+            {
+                new Visa(100M),
+                new Discover(100M)
+            };
+            var creditCards2 = new List<CreditCard>()
+            {
+                new MasterCard(100M)
+            };
+            person.Wallets.Add(new Wallet(creditCards1));
+            person.Wallets.Add(new Wallet(creditCards2));
+
             
             //Act
-            var interestWallet1 = person.Wallets[0].CalculateTotalInterest();
-            var interestWallet2 = person.Wallets[1].CalculateTotalInterest();
+            var interestWallet1 = person.Wallets[0].CalculateWalletInterest();
+            var interestWallet2 = person.Wallets[1].CalculateWalletInterest();
             var interestPerson = person.CalculateTotalInterest();
             
             //Assert
@@ -79,29 +74,17 @@ namespace Tests
         public void TestCase3()
         {
             //Arrange
-            var wallets1 = new List<Wallet>();
-            wallets1.Add(new Wallet(
-                new List<CreditCard>()
-                {
-                    new MasterCard(CreditCardType.MasterCard, 100M),
-                    new MasterCard(CreditCardType.MasterCard, 100M),
-                    new Visa(CreditCardType.Visa, 100M)
-                }                
-            ));
-
             var person1 = new Person()
             {
                 FirstName = "Warren",
                 LastName = "Buffet",
-                Wallets = wallets1
-            };
-            
-            var wallets2 = new List<Wallet>();
-            wallets2.Add(new Wallet(
+            };            
+            person1.Wallets.Add(new Wallet(
                 new List<CreditCard>()
                 {
-                    new Visa(CreditCardType.Visa, 100M),
-                    new MasterCard(CreditCardType.MasterCard, 100M)
+                    new MasterCard(100M),
+                    new MasterCard(100M),
+                    new Visa(100M)
                 }                
             ));
             
@@ -109,14 +92,20 @@ namespace Tests
             {
                 FirstName = "Bit",
                 LastName = "Coin",
-                Wallets = wallets2
             };
+            person2.Wallets.Add(new Wallet(
+                new List<CreditCard>()
+                {
+                    new Visa(100M),
+                    new MasterCard(100M)
+                }                
+            ));
 
             //Act
             var interestPerson1 = person1.CalculateTotalInterest();
             var interestPerson2 = person2.CalculateTotalInterest();
-            var interestWallet1Person1 = person1.Wallets[0].CalculateTotalInterest();
-            var interestWallet1Person2 = person2.Wallets[0].CalculateTotalInterest();
+            var interestWallet1Person1 = person1.Wallets[0].CalculateWalletInterest();
+            var interestWallet1Person2 = person2.Wallets[0].CalculateWalletInterest();
 
             //Assert
             Assert.AreEqual(interestPerson1, 20M);

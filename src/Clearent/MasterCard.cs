@@ -4,9 +4,10 @@ namespace Clearent
 {
     public class MasterCard : CreditCard
     {   
-        public MasterCard(CreditCardType cardType, decimal balance) : base(cardType, balance)
+        public MasterCard(decimal balance) : base(balance)
         {
-            Rate = repo.GetInterestRate(cardType);
+            cardType = CreditCardType.MasterCard;
+            Rate = CardManager.GetInterestRate(cardType);
         }
     }
 }

@@ -7,7 +7,7 @@ namespace ClearentData
     {
         private static Dictionary<CreditCardType, decimal> _cardRates;
 
-        public CreditCardTestRepo() 
+        static CreditCardTestRepo() 
         {           
             if (_cardRates == null)
             {
@@ -18,11 +18,13 @@ namespace ClearentData
                     { CreditCardType.Discover, 0.01M }
                 }; 
             }            
-        }        
+        }
+        
         public Dictionary<CreditCardType, decimal> GetCardRates()
         {
             return _cardRates;
         }
+
         public decimal GetInterestRate(CreditCardType cardType)
         {
             var rates = GetCardRates();

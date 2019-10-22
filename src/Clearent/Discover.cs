@@ -3,10 +3,11 @@
 namespace Clearent
 {
     public class Discover : CreditCard
-    {               
-        public Discover(CreditCardType cardType, decimal balance) : base(cardType, balance)
+    {                      
+        public Discover(decimal balance) : base(balance)
         {
-            Rate = repo.GetInterestRate(cardType);
+            cardType = CreditCardType.Discover;
+            Rate = CardManager.GetInterestRate(cardType);
         }       
     }
 }

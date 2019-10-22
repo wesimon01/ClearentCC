@@ -3,10 +3,11 @@
 namespace Clearent
 {
     public class Visa : CreditCard
-    {       
-        public Visa(CreditCardType cardType, decimal balance) : base(cardType, balance)
+    {   
+        public Visa(decimal balance) : base(balance)
         {
-            Rate = repo.GetInterestRate(cardType);
+            cardType = CreditCardType.Visa;
+            Rate = CardManager.GetInterestRate(cardType);
         }
     }
 }

@@ -2,8 +2,8 @@
 {
     public enum CreditCardType
     {
-        Visa,
-        MasterCard,
-        Discover
+        Visa = 1,
+        MasterCard = 2,
+        Discover = 3
     }
 }

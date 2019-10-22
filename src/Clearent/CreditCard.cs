@@ -3,21 +3,18 @@
 namespace Clearent
 {
     public abstract class CreditCard
-    {       
+    {   
         public decimal Balance { get; set; }
         public decimal Rate { get; set; }
-        public CreditCardType CardType { get; set; }
+        
+        protected CreditCardType cardType;
 
-        protected ICreditCardRepo repo;
-
-        public CreditCard(CreditCardType cardType, decimal balance)
+        public CreditCard(decimal balance)
         {
-            repo = CreditCardRepoFactory.GetRepository();
-            CardType = cardType;
             Balance = balance;
         }
         
-        public virtual decimal CalculateInterest()
-            => Rate * Balance;
+        public virtual decimal CalculateCardInterest() => Rate * Balance;
+        
     }
 }

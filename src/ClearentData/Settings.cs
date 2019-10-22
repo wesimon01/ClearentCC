@@ -2,10 +2,10 @@
 
 namespace ClearentData
 {
-    public class Settings
+    public static class Settings
     {
         private static string _repoType;
-      
+         
         public static string GetRepoType()
         {
             // var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);

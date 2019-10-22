@@ -8,6 +8,5 @@ namespace ClearentData
     {
         decimal GetInterestRate(CreditCardType cardType);
         Dictionary<CreditCardType, decimal> GetCardRates();
-
     }
 }
